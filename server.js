@@ -30,6 +30,9 @@ app.use('/api', apiRoutes);
  *
  */
 
+// Search route.
+apiRoutes.get('/search', rfr('server/routes/search'));
+
 // Test route.
 apiRoutes.get('/test', rfr('server/routes/test'));
 
@@ -41,18 +44,18 @@ apiRoutes.get('/test', rfr('server/routes/test'));
  *
  */
 
+ // Error handling route.
+ app.use((err, req, res, next) => {
+   console.error(err.stack);
+   res.status(500).send(err);
+ });
+
 // Serve static files under the /dist folder.
 app.use(express.static('dist'));
 
 // Route to capture client-side routes and use the statically served files.
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
-});
-
-// Error handling route.
-app.use((err, req, res) => {
-  console.error(err.stack);
-  res.status(500).send(err);
 });
 
 /*
