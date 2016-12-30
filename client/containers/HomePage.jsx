@@ -4,6 +4,9 @@ import React from 'react';  // Standard React library.
 // Redux dependencies.
 import { connect } from 'react-redux';  // Connect to redux store.
 
+// React components.
+import SearchWidget from 'components/SearchWidget';
+
 // Component definition.
 class HomePage extends React.Component {
 
@@ -22,7 +25,7 @@ class HomePage extends React.Component {
           </div>
 
           <div className="box">
-            Search widget
+            <SearchWidget />
           </div>
 
         </div>
