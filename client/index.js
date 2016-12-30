@@ -13,6 +13,11 @@ import { createStore } from 'redux';
 import reducers from 'reducers/index.js';
 const store = createStore(reducers);
 
+// Subscribe to state changes.
+store.subscribe(() => {
+  console.log(store.getState());
+});
+
 // React components.
 import HomePage from 'containers/HomePage';
 
