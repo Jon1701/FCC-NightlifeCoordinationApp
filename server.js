@@ -1,56 +1,72 @@
-////////////////////////////////////////////////////////////////////////////////
-// Dependencies
-////////////////////////////////////////////////////////////////////////////////
-const rfr = require('rfr');       // Root relative paths.
-const morgan = require('morgan'); // Log requests to console.
-const path = require('path');
+// Dependencies.
+const bodyParser = require('body-parser'); // Parse parameters from request body.
+const express = require('express'); // ExpressJS.
+const morgan = require('morgan');   // Log requests to console.
+const path = require('path');       // Path module.
+const rfr = require('rfr');         // Root relative paths.
 
-////////////////////////////////////////////////////////////////////////////////
-// Express
-////////////////////////////////////////////////////////////////////////////////
-const express = require('express');
+// Express JS instance.
 const app = express();
 
-// Use morgan to log requests to console.
+// Log requests to console.
 app.use(morgan('dev'));
 
-// Gets parameters from requests.
-const bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({extended: false}));
+// Use middleware which parses urlencoded bodies.
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// use middleware which parses JSON.
 app.use(bodyParser.json());
 
-////////////////////////////////////////////////////////////////////////////////
-// Routers
-////////////////////////////////////////////////////////////////////////////////
+// API router: Routes defined under this router are prefixed by /api
 const apiRoutes = express.Router();
-
-// Assign routes to a router.
 app.use('/api', apiRoutes);
 
-////////////////////////////////////////////////////////////////////////////////
-// Route to handle errors.
-////////////////////////////////////////////////////////////////////////////////
-app.use((err, req, res, next) => {
+/*
+ *
+ *
+ *  Unprotected routes.
+ *  Base endpoint: /api
+ *
+ *
+ */
+
+// Test route.
+apiRoutes.get('/test', rfr('server/routes/test'));
+
+/*
+ *
+ *
+ *  Server-side rendering, and error routes.
+ *
+ *
+ */
+
+// Serve static files under the /dist folder.
+app.use(express.static('dist'));
+
+// Route to capture client-side routes and use the statically served files.
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
+});
+
+// Error handling route.
+app.use((err, req, res) => {
   console.error(err.stack);
   res.status(500).send(err);
 });
 
-////////////////////////////////////////////////////////////////////////////////
-// Serve files from the ./dist folder.
-////////////////////////////////////////////////////////////////////////////////
-app.use(express.static('dist'));
+/*
+ *
+ *
+ *  Server
+ *
+ *
+ */
 
-////////////////////////////////////////////////////////////////////////////////
-// Route to capture client-side routes and use the statically served files.
-////////////////////////////////////////////////////////////////////////////////
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
-})
-
-////////////////////////////////////////////////////////////////////////////////
-// Server.
-////////////////////////////////////////////////////////////////////////////////
+// Get next available port, or use 8080 if available.
 const port = process.env.PORT || 8080;
+
+//
 app.listen(port, () => {
-  console.log('Listening for connections on PORT ' + port);
+  console.log(`Listening for connections on PORT ${port}`);
 });
