@@ -25,9 +25,9 @@ const MediaObject = props => (
             </a>
           </strong>
           <br />
-          <p className="is-italic">
+          <span className="is-italic">
             {props.field.snippet_text}
-          </p>
+          </span>
         </p>
       </div>
     </div>
