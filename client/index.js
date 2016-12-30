@@ -1,43 +1,32 @@
-////////////////////////////////////////////////////////////////////////////////
-// React
-////////////////////////////////////////////////////////////////////////////////
+// React dependencies.
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-////////////////////////////////////////////////////////////////////////////////
-// React Router
-////////////////////////////////////////////////////////////////////////////////
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+// React Router dependencies.
+import { Router, Route, browserHistory } from 'react-router';
 
-////////////////////////////////////////////////////////////////////////////////
-// Redux
-////////////////////////////////////////////////////////////////////////////////
+// Redux dependencies.
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
 // Reducers and store.
 import reducers from 'reducers/index.js';
-let store = createStore(reducers);
+const store = createStore(reducers);
 
-/*
-// Subscribe to state changes.
-store.subscribe(() => {
-  console.log(store.getState());
-});
-*/
+// React components.
+import HomePage from 'containers/HomePage';
 
 // Application stylesheet.
 require("stylesheets/stylesheet.scss");
 
-// Application Container.
-// Contains redux store, and client routes.
+// Application UI Container.
 const ApplicationUIContainer = (
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path='/' component={}/>
+      <Route path="/" component={HomePage} />
     </Router>
   </Provider>
-)
+);
 
 // Render to DOM.
 ReactDOM.render(ApplicationUIContainer, document.getElementById('react-target'));
