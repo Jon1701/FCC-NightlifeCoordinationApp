@@ -47,6 +47,7 @@ const successes = {
   GOING: {
     USER_GOING: response('USER_GOING', 'User is going to the business.'),
     USER_NOT_GOING: response('USER_NOT_GOING', 'User is not going to the business'),
+    USERS_TALLIED: response('USERS_TALLIED', 'Users going has been tallied.'),
   },
 };
 

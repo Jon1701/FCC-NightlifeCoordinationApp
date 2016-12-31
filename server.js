@@ -62,6 +62,9 @@ apiRoutes.post('/signup', rfr('/server/routes/signup'));
 // Login route.
 apiRoutes.post('/login', rfr('/server/routes/login'));
 
+// Get RSVP counts.
+apiRoutes.get('/rsvp_count/:business_id', rfr('/server/routes/rsvp_count'));
+
 /*
  *
  *
