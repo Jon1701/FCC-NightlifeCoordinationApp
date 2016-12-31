@@ -16,8 +16,13 @@ const results = (state = null, action) => {
 
     // Delete existing results from state.
     case 'DELETE_RESULTS':
+      try {
+        sessionStorage.removeItem('results');
+      } catch (e) {
+        // Do nothing.
+      }
       return null;
-
+      
     // Return empty state by default.
     default:
       return state;

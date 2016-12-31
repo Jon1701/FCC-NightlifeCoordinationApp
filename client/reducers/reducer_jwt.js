@@ -16,6 +16,12 @@ const jwt = (state = null, action) => {
 
     // Delete existing results from state.
     case 'DELETE_TOKEN':
+      // Remove token in session storage.
+      try {
+        sessionStorage.removeItem('token');
+      } catch (e) {
+        // Do nothing.
+      }
       return null;
 
     // Return empty state by default.
