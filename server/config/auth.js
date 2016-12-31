@@ -6,6 +6,9 @@ const auth = {
     TOKEN: process.env.YELP_TOKEN,
     TOKEN_SECRET: process.env.YELP_TOKEN_SECRET,
   },
+  JWT: {
+    SIGNING_KEY: process.env.JWT_SIGNING_KEY,
+  },
 };
 
 // Module export.
