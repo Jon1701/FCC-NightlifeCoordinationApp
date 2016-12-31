@@ -16,6 +16,11 @@ const errors = {
     MISSING_PASSWORD_CONFIRMATION: response('MISSING_PASSWORD_CONFIRMATION', 'Both password and password confirmation are required.'),
     USER_EXISTS: response('USER_EXISTS', 'User already exists.'),
   },
+  LOGIN: {
+    NO_USER_FOUND: response('NO_USER_FOUND', 'No user found.'),
+    MISSING_CREDENTIALS: response('MISSING_CREDENTIALS', 'Both a username and password are required.'),
+    INVALID_CREDENTIALS: response('INVALID_CREDENTIALS', 'Incorrect username or password.'),
+  },
   DB: {
     DB_ERROR: response('DB_ERROR', 'Unknown database error occurred.'),
   },
@@ -25,6 +30,9 @@ const errors = {
 const successes = {
   SIGNUP: {
     USER_CREATED: response('USER_CREATED', 'User successfully created.'),
+  },
+  LOGIN: {
+    LOGIN_SUCCESS: response('LOGIN_SUCCESS', 'Login successful.'),
   },
   YELP: {
     API_SUCCESS: response('API_SUCCESS', 'Data successfully retrieved via Yelp API.'),
