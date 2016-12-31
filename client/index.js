@@ -2,8 +2,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+// React component.
+import App from 'containers/App';
+import HomePage from 'containers/HomePage';
+import LoginPage from 'containers/LoginPage';
+
 // React Router dependencies.
-import { Router, Route, browserHistory } from 'react-router';
+import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 
 // Redux dependencies.
 import { Provider } from 'react-redux';
@@ -18,9 +23,6 @@ store.subscribe(() => {
   console.log(store.getState());
 });
 
-// React components.
-import HomePage from 'containers/HomePage';
-
 // Application stylesheet.
 require("stylesheets/stylesheet.scss");
 
@@ -28,7 +30,10 @@ require("stylesheets/stylesheet.scss");
 const ApplicationUIContainer = (
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path="/" component={HomePage} />
+      <Route path="/" component={App}>
+        <IndexRoute component={HomePage} />
+        <Route path="/login" component={LoginPage} />
+      </Route>
     </Router>
   </Provider>
 );
