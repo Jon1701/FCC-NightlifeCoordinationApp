@@ -31,7 +31,7 @@ class NavigationBar extends React.Component {
       <nav className="nav">
         <div className="nav-left">
           <Link to="/" className="nav-item is-brand">
-            FCC Nightlife Coordination
+            Nightlife
           </Link>
         </div>
 
