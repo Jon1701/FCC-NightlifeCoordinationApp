@@ -33,6 +33,9 @@ app.use('/api', apiRoutes);
 // Search route.
 apiRoutes.get('/search', rfr('server/routes/search'));
 
+// Signup route.
+apiRoutes.post('/signup', rfr('/server/routes/signup'));
+
 /*
  *
  *
