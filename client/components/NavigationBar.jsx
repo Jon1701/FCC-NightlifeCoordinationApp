@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 // Redux Actions.
-import { storeToken } from 'actions/index';
+import { storeToken, deleteToken } from 'actions/index';
 
 // Component definition.
 class NavigationBar extends React.Component {
@@ -46,7 +46,7 @@ class NavigationBar extends React.Component {
 const mapStateToProps = state => ({ token: state.token });
 
 // Allow access of dispatch actions as props.
-const mapDispatchToProps = dispatch => (bindActionCreators({ storeToken }, dispatch));
+const mapDispatchToProps = dispatch => (bindActionCreators({ storeToken, deleteToken }, dispatch));
 
 // Allow component access to Redux store.
 export default connect(mapStateToProps, mapDispatchToProps)(NavigationBar);
@@ -54,7 +54,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(NavigationBar);
 // Typecheck this.props.
 NavigationBar.propTypes = {
   storeToken: React.PropTypes.func,
-  token: React.PropTypes.string,
 };
 
 /*
@@ -74,6 +73,6 @@ const NotLoggedIn = () => (
 // Navigation Bar buttons for authenticated users.
 const LoggedIn = () => (
   <div className="nav-center">
-    <Link className="nav-item">Logout</Link>
+    <Link to="/logout" className="nav-item">Logout</Link>
   </div>
 );
