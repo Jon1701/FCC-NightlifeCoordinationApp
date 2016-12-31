@@ -12,7 +12,7 @@ const jwt = (state = null, action) => {
       }
 
       // Return results in reducer.
-      return Object.assign({}, action.payload);
+      return action.payload;
 
     // Delete existing results from state.
     case 'DELETE_TOKEN':
