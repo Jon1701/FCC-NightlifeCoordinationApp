@@ -3,7 +3,7 @@ const Yelp = require('yelp'); // Yelp API wrapper.
 const rfr = require('rfr'); // Root-relative paths.
 
 // Other dependencies.
-const APP_CONFIG = rfr('server/config/appConfig');  // Application keys and tokens.
+const AUTH = rfr('server/config/auth');  // Application keys and tokens.
 const MSG = rfr('server/messages/index'); // Success/Error responses.
 
 // Route definition.
@@ -24,10 +24,10 @@ const search = (req, res, next) => {
 
   // Create a Yelp instance, pass in API keys.
   const yelp = new Yelp({
-    consumer_key: APP_CONFIG.YELP_CONSUMER_KEY,
-    consumer_secret: APP_CONFIG.YELP_CONSUMER_SECRET,
-    token: APP_CONFIG.YELP_TOKEN,
-    token_secret: APP_CONFIG.YELP_TOKEN_SECRET,
+    consumer_key: AUTH.YELP.CONSUMER_KEY,
+    consumer_secret: AUTH.YELP.CONSUMER_SECRET,
+    token: AUTH.YELP.TOKEN,
+    token_secret: AUTH.YELP.TOKEN_SECRET,
   });
 
   // Call the Yelp /search endpoint with the given term and location.
