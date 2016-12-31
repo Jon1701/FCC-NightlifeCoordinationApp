@@ -33,9 +33,6 @@ app.use('/api', apiRoutes);
 // Search route.
 apiRoutes.get('/search', rfr('server/routes/search'));
 
-// Test route.
-apiRoutes.get('/test', rfr('server/routes/test'));
-
 /*
  *
  *
