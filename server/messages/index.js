@@ -21,8 +21,15 @@ const errors = {
     MISSING_CREDENTIALS: response('MISSING_CREDENTIALS', 'Both a username and password are required.'),
     INVALID_CREDENTIALS: response('INVALID_CREDENTIALS', 'Incorrect username or password.'),
   },
+  GOING: {
+    MISSING_BUSINESS_ID: response('MISSING_BUSINESS_ID', 'A business ID is required.'),
+  },
   DB: {
     DB_ERROR: response('DB_ERROR', 'Unknown database error occurred.'),
+  },
+  JWT: {
+    MISSING_TOKEN: response('MISSING_TOKEN', 'No token sent in request header.'),
+    INVALID_TOKEN: response('INVALID_TOKEN', 'Token is invalid.'),
   },
 };
 
@@ -36,6 +43,10 @@ const successes = {
   },
   YELP: {
     API_SUCCESS: response('API_SUCCESS', 'Data successfully retrieved via Yelp API.'),
+  },
+  GOING: {
+    USER_GOING: response('USER_GOING', 'User is going to the business.'),
+    USER_NOT_GOING: response('USER_NOT_GOING', 'User is not going to the business'),
   },
 };
 
