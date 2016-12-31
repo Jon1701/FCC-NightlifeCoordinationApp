@@ -5,8 +5,19 @@ const morgan = require('morgan');   // Log requests to console.
 const path = require('path');       // Path module.
 const rfr = require('rfr');         // Root relative paths.
 
+// Other modules.
+const verifyJWT = rfr('/server/middleware/verifyJWT');  // Verify JWT.
+
 // Express JS instance.
 const app = express();
+
+/*
+ *
+ *
+ *  Application Middleware.
+ *
+ *
+ */
 
 // Log requests to console.
 app.use(morgan('dev'));
@@ -17,9 +28,21 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // use middleware which parses JSON.
 app.use(bodyParser.json());
 
-// API router: Routes defined under this router are prefixed by /api
+/*
+ *
+ *
+ *  Routers.
+ *
+ *
+ */
+
+// Router: Base endpoint: /api.
 const apiRoutes = express.Router();
 app.use('/api', apiRoutes);
+
+// Router. Base endpoint: /api/auth.
+const authRoutes = express.Router();
+app.use('/api/auth', authRoutes);
 
 /*
  *
@@ -38,6 +61,21 @@ apiRoutes.post('/signup', rfr('/server/routes/signup'));
 
 // Login route.
 apiRoutes.post('/login', rfr('/server/routes/login'));
+
+/*
+ *
+ *
+ *  Protected routes.
+ *  Base endpoint: /api/auth
+ *
+ *
+ */
+
+// Middleware: verify JWT for authenticated routes.
+authRoutes.use(verifyJWT);
+
+// Going to a business.
+authRoutes.post('/going', rfr('/server/routes/auth/going'));
 
 /*
  *
@@ -72,7 +110,7 @@ app.get('*', (req, res) => {
 // Get next available port, or use 8080 if available.
 const port = process.env.PORT || 8080;
 
-//
+// Listen for connections.
 app.listen(port, () => {
   console.log(`Listening for connections on PORT ${port}`);
 });
