@@ -36,6 +36,9 @@ apiRoutes.get('/search', rfr('server/routes/search'));
 // Signup route.
 apiRoutes.post('/signup', rfr('/server/routes/signup'));
 
+// Login route.
+apiRoutes.post('/login', rfr('/server/routes/login'));
+
 /*
  *
  *
