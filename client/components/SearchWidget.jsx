@@ -139,6 +139,8 @@ class SearchWidget extends React.Component {
           <div className="columns">
             <div className="column is-half is-offset-one-quarter">
               <button className="button is-primary">Search</button>
+              {' '}
+              <button className="button is-primary" onClick={this.handleFormReset}>Clear</button>
             </div>
           </div>
         </form>
