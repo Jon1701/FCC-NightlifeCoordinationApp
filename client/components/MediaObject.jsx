@@ -31,9 +31,6 @@ const MediaObject = props => (
         </p>
       </div>
     </div>
-    <div className="media-right">
-      <button className="delete" />
-    </div>
   </article>
 );
 
