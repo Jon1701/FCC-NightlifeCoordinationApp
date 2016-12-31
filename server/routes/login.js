@@ -69,7 +69,7 @@ const login = (req, res, next) => {
      */
 
     if (storedHashedPassword !== genHashedPassword) {
-      return next(MSG.ERR.LOGIN.INVALID_CREDENTIALS);
+      return next(MSG.ERROR.LOGIN.INVALID_CREDENTIALS);
     }
 
     /*
