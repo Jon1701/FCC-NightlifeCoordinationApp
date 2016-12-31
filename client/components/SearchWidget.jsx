@@ -53,7 +53,7 @@ class SearchWidget extends React.Component {
     e.preventDefault();
 
     // Get form field contents.
-    const term = this.termInput.value.trim();
+    const term = 'bar'; // this.termInput.value.trim();
     const location = this.locationInput.value.trim();
 
     // Encode a URI to the API endpoint along with the search term and location.
@@ -83,8 +83,8 @@ class SearchWidget extends React.Component {
         switch (code) {
           // No search term provided.
           case 'NO_TERM':
-            this.setAlert('DANGER', 'We need to know what you are looking for!');
-            this.termInput.focus();
+            // this.setAlert('DANGER', 'We need to know what you are looking for!');
+            // this.termInput.focus();
             break;
 
           // No location term provided.
@@ -107,7 +107,7 @@ class SearchWidget extends React.Component {
     e.preventDefault();
 
     // Reset form fields.
-    this.termInput.value = '';
+    // this.termInput.value = '';
     this.locationInput.value = '';
 
     // Clear alert.
@@ -123,22 +123,8 @@ class SearchWidget extends React.Component {
       <div>
         <AlertBox alert={this.state.alert} handleClose={this.clearAlert} />
         <form onSubmit={this.handleFormSubmit} method="GET">
-
           <div className="columns">
-            <div className="column is-half-desktop">
-              <label htmlFor="termInput" className="label">What are you looking for?</label>
-              <p className="control">
-                <input
-                  id="termInput"
-                  className="input"
-                  type="text"
-                  ref={(input) => { this.termInput = input; }}
-                  placeholder="eg: Restaurant, Bar, Bakery?"
-                />
-              </p>
-            </div>
-            <div className="column is-half-desktop">
-              <label htmlFor="locationInput" className="label">Where?</label>
+            <div className="column">
               <p className="control">
                 <input
                   id="locationInput"
