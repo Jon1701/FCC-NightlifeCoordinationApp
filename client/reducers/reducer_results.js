@@ -12,7 +12,7 @@ const results = (state = null, action) => {
       }
 
       // Return results in reducer.
-      return action.payload;
+      return Object.assign({}, action.payload);
 
     // Delete existing results from state.
     case 'DELETE_RESULTS':
