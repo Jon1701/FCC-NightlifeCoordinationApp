@@ -123,26 +123,38 @@ class SearchWidget extends React.Component {
       <div>
         <AlertBox alert={this.state.alert} handleClose={this.clearAlert} />
         <form onSubmit={this.handleFormSubmit} method="GET">
-          <p className="control">
-            <input
-              className="input"
-              type="text"
-              ref={(input) => { this.termInput = input; }}
-              placeholder="What are you looking for?"
-            />
-          </p>
-          <p className="control">
-            <input
-              className="input"
-              type="text"
-              ref={(input) => { this.locationInput = input; }}
-              placeholder="What is your location?"
-            />
-          </p>
-          <p className="control">
-            <button className="button is-primary">Submit</button>
-            <button className="button is-primary" onClick={this.handleFormReset}>Clear</button>
-          </p>
+
+          <div className="columns">
+            <div className="column is-half-desktop">
+              <label htmlFor="termInput" className="label">What are you looking for?</label>
+              <p className="control">
+                <input
+                  id="termInput"
+                  className="input"
+                  type="text"
+                  ref={(input) => { this.termInput = input; }}
+                  placeholder="eg: Restaurant, Bar, Bakery?"
+                />
+              </p>
+            </div>
+            <div className="column is-half-desktop">
+              <label htmlFor="locationInput" className="label">Where?</label>
+              <p className="control">
+                <input
+                  id="locationInput"
+                  className="input"
+                  type="text"
+                  ref={(input) => { this.locationInput = input; }}
+                  placeholder="eg: Toronto, Manhattan, San Francisco?"
+                />
+              </p>
+            </div>
+          </div>
+          <div className="columns">
+            <div className="column is-half is-offset-one-quarter">
+              <button className="button is-primary">Search</button>
+            </div>
+          </div>
         </form>
       </div>
     );
