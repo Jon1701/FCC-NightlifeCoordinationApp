@@ -1,5 +1,5 @@
 {
-  "name": "NightlifeCoordination",
+  "name": "Nightlife",
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
@@ -7,7 +7,7 @@
     "client": "cross-env NODE_ENV=development webpack && webpack-dev-server --quiet --hot --progress --inline",
     "server": "cross-env NODE_ENV=development nodemon ./server.js 8080"
   },
-  "repository": "https://github.com/Jon1701/NightlifeCoordination.git",
+  "repository": "https://github.com/Jon1701/Nightlife.git",
   "author": "Jon1701",
   "license": "MIT",
   "dependencies": {
