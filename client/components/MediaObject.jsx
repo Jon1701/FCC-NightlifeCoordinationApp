@@ -1,6 +1,9 @@
 // Dependencies.
 import React from 'react';  // React.
 
+// React components.
+import RSVPWidget from 'components/RSVPWidget';
+
 // Component definition.
 const MediaObject = props => (
   <article className="media box">
@@ -10,11 +13,12 @@ const MediaObject = props => (
           <img src={props.field.image_url} alt={props.field.name} />
         </a>
       </p>
-      <p className="has-text-centered">
-        <span>
+      <div className="has-text-centered">
+        <div>
           <img src={props.field.rating_img_url_small} alt={`Rating: ${props.field.rating}/5`} />
-        </span>
-      </p>
+        </div>
+        <RSVPWidget businessID={props.field.id} />
+      </div>
     </figure>
     <div className="media-content">
       <div className="content">
@@ -37,9 +41,10 @@ const MediaObject = props => (
 // Component export.
 export default MediaObject;
 
-// Typecheck props
+// Prop validation.
 MediaObject.propTypes = {
   field: React.PropTypes.shape({
+    id: React.PropTypes.string,
     url: React.PropTypes.string,
     image_url: React.PropTypes.string,
     rating: React.PropTypes.number,

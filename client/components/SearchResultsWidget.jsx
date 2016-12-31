@@ -20,8 +20,8 @@ class SearchResultsWidget extends React.Component {
     }
 
     // For each business, generate HTML with each field.
-    const businesses = this.props.results.businesses.map((val, idx) => (
-      <MediaObject key={idx} field={val} />
+    const businesses = this.props.results.businesses.map(val => (
+      <MediaObject key={val.id} field={val} />
     ));
 
     // Display results.
