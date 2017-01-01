@@ -2,6 +2,10 @@
   "name": "Nightlife",
   "version": "1.0.0",
   "main": "server.js",
+  "engines": {
+    "node": "7.3.0",
+    "npm": "3.10.10"
+  },
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack -p",
     "client": "cross-env NODE_ENV=development webpack && webpack-dev-server --quiet --hot --progress --inline",
