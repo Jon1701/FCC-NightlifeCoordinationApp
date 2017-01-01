@@ -24,6 +24,7 @@ class SearchWidget extends React.Component {
     // Local component state.
     this.state = {
       alert: null,  // Alert box data.
+      searchInProgress: false,  // Flag to see if a search is in progress.
     };
 
     // Bind methods to component instance.
@@ -51,6 +52,9 @@ class SearchWidget extends React.Component {
   handleFormSubmit(e) {
     // Prevent default form action.
     e.preventDefault();
+
+    // Delete any existing search results from redux state.
+    this.props.deleteResults();
 
     // Get form field contents.
     const term = 'bar'; // this.termInput.value.trim();
