@@ -23,6 +23,7 @@ const errors = {
   },
   GOING: {
     MISSING_BUSINESS_ID: response('MISSING_BUSINESS_ID', 'A business ID is required.'),
+    MISSING_USERNAME: response('MISSING_USERNAME', 'A username is required.'),
   },
   DB: {
     DB_ERROR: response('DB_ERROR', 'Unknown database error occurred.'),
@@ -48,6 +49,7 @@ const successes = {
     USER_GOING: response('USER_GOING', 'User is going to the business.'),
     USER_NOT_GOING: response('USER_NOT_GOING', 'User is not going to the business'),
     USERS_TALLIED: response('USERS_TALLIED', 'Users going has been tallied.'),
+    CHECK_RSVP: response('CHECK_RSVP', 'RSVP check complete for the given user and business.'),
   },
 };
 

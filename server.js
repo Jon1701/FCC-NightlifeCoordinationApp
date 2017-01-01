@@ -80,6 +80,9 @@ authRoutes.use(verifyJWT);
 // Going to a business.
 authRoutes.post('/going', rfr('/server/routes/auth/going'));
 
+// Get RSVP status of a user and a business.
+authRoutes.post('/get_rsvp', rfr('/server/routes/auth/get_rsvp'));
+
 /*
  *
  *
