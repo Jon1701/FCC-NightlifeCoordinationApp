@@ -1,6 +1,9 @@
 // React
 import React from 'react';
 
+// React components.
+import RSVPCounter from 'components/RSVPCounter';
+
 // Redux
 import { connect } from 'react-redux';
 
@@ -20,18 +23,51 @@ class RSVPWidget extends React.Component {
 
     // Local state.
     this.state = {
-      rsvpCount: 0, // RSVP count for this event.
+      rsvpCount: 0,     // RSVP count for this event.
+      rsvpStatus: null, // RSVP status.
     };
 
     // Bind methods to component instance.
     this.toggleGoing = this.toggleGoing.bind(this);
     this.getRSVPCounts = this.getRSVPCounts.bind(this);
+    this.getRSVPStatus = this.getRSVPStatus.bind(this);
   }
 
   // Component Lifecycle Method.
   componentDidMount() {
     // Get RSVP counts.
     this.getRSVPCounts();
+
+    // Get RSVP status if token is provided.
+    if (this.props.token) {
+      this.getRSVPStatus(); // Get RSVP status.
+    }
+  }
+
+  // Method to get RSVP status of a user and business.
+  getRSVPStatus() {
+    // Request body containing the business ID.
+    const body = {
+      business_id: this.props.businessID,
+    };
+
+    // Send POST request to API endpoint.
+    request.post('/api/auth/get_rsvp', body, this.props.token)
+      .then((res) => {
+        // Different actions based on server response.
+        switch (res.data.code) {
+          // Successfully checked RSVP.
+          case 'CHECK_RSVP':
+            this.setState({ rsvpStatus: res.data.payload.isRSVP });
+            break;
+          // Default case: do nothing.
+          default:
+            break;
+        }
+      })
+      .catch(() => {
+        // Nothing to do.
+      });
   }
 
   // Method to get RSVP counts for a business.
@@ -59,10 +95,7 @@ class RSVPWidget extends React.Component {
   }
 
   // Method to toggle whether or not the user is going to the venue.
-  toggleGoing(e) {
-    // Prevent default form action.
-    e.preventDefault();
-
+  toggleGoing() {
     // Request token and body.
     const token = this.props.token;
     const body = { business_id: this.props.businessID };
@@ -70,16 +103,22 @@ class RSVPWidget extends React.Component {
     // Send POST request to API endpoing: /api/auth/going.
     request.post('/api/auth/going', body, token)
       .then((res) => {
+        // Deconstruct rsvp count and status.
+        const { rsvpCount, rsvpStatus } = this.state;
+
         // Different behaviour on different response codes.
         switch (res.data.code) {
+
           // User is going to the business, increment RSVP count.
           case 'USER_GOING':
-            this.setState({ rsvpCount: this.state.rsvpCount + 1 });
+            this.setState({ rsvpCount: rsvpCount + 1, rsvpStatus: !rsvpStatus });
             break;
+
           // Users is not going, decrement RSVP count.
           case 'USER_NOT_GOING':
-            this.setState({ rsvpCount: this.state.rsvpCount - 1 });
+            this.setState({ rsvpCount: rsvpCount - 1, rsvpStatus: !rsvpStatus });
             break;
+
           // Default case.
           default:
             break;
@@ -92,22 +131,14 @@ class RSVPWidget extends React.Component {
 
   // Render.
   render() {
-    // If user is unauthenticated, just show counts.
-    if (!this.props.token) {
-      return (
-        <div className="has-text-centered">
-          <RSVPCounter rsvpCount={this.state.rsvpCount} />
-        </div>
-      );
-    }
-
     // If user is authenticated, show a button.
     return (
       <div className="has-text-centered">
-        <RSVPCounter rsvpCount={this.state.rsvpCount} />
-        <div>
-          <button onClick={this.toggleGoing}>RSVP</button>
-        </div>
+        <RSVPCounter
+          rsvpStatus={this.state.rsvpStatus}
+          rsvpCount={this.state.rsvpCount}
+          handleClick={this.toggleGoing}
+        />
       </div>
     );
   }
@@ -123,14 +154,4 @@ export default connect(mapStateToProps, null)(RSVPWidget);
 RSVPWidget.propTypes = {
   token: React.PropTypes.string,
   businessID: React.PropTypes.string,
-};
-
-// RSVP Counter.
-const RSVPCounter = ({ rsvpCount }) => (
-  <span className="tag">{rsvpCount} going</span>
-);
-
-// Prop validation.
-RSVPCounter.propTypes = {
-  rsvpCount: React.PropTypes.number,
 };
