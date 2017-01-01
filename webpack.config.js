@@ -124,7 +124,7 @@ var config = {
       mobile: true,   // Responsive viewport.
       inject: false,  // Controls asset addition to the template.
                       // html-webpack-template will control injection.
-      title: 'Voteify', // <title/> tag
+      title: 'Nightlife: Where do you want to go tonight?', // <title/> tag
       appMountId: 'react-target', // Adds mount point for React apps: <div id="react-target"/>.
       template: require('html-webpack-template'),   // Module to control .html file injection.
       filename: 'index.html' // File name.
