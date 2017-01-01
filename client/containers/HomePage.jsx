@@ -34,7 +34,7 @@ class HomePage extends React.Component {
         <div className="column is-10 is-offset-1">
 
           <div className="box">
-            <h4 className="subtitle is-4">Where are you going tonight?</h4>
+            <h4 className="subtitle is-4">Where do you want to go tonight?</h4>
           </div>
 
           <div className="box">
