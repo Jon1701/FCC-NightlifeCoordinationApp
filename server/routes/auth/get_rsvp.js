@@ -30,13 +30,11 @@ mongoose.createConnection(DB_CONFIG.CONN_STRING);
  *
  */
 const getRSVP = (req, res, next) => {
-
   // Get username and business id.
-  const username = req.body.username;
+  const username = req.decoded.username;
   const businessID = req.body.business_id;
 
   // Error check: username and business ID are required.
-  if (!username) { return next(MSG.ERROR.GOING.MISSING_USERNAME); }
   if (!businessID) { return next(MSG.ERROR.GOING.MISSING_BUSINESS_ID); }
 
   // Query to search the database.
@@ -58,15 +56,11 @@ const getRSVP = (req, res, next) => {
       isRSVP,
       username,
       business_id: businessID,
-     };
+    };
 
     // Send response.
     return res.json(Object.assign({}, MSG.SUCCESS.GOING.CHECK_RSVP, { payload }));
-
-
-
   });
-
 
   // Keep linter happy.
   return true;
