@@ -19,9 +19,19 @@ class RSVPCounter extends React.Component {
       'is-primary': rsvpStatus,
     });
 
+    // Text to be displayed on the button.
+    let displayText = null;
+    if (rsvpCount > 10) {
+      // If more than 10 people are in attendance, show 10+.
+      displayText = '10+ going';
+    } else {
+      // Fewer than 10, display count.
+      displayText = `${rsvpCount} going`;
+    }
+
     return (
       <button className={myClasses} onClick={token ? handleClick : null}>
-        {rsvpCount} going
+        {displayText}
       </button>
     );
   }
