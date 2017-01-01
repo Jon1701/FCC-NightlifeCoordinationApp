@@ -4,6 +4,9 @@ import React from 'react';
 // React Components.
 import AlertBox from 'components/AlertBox';
 
+// React Router.
+import { withRouter } from 'react-router';  // Allows component to be aware of React Router
+
 // Redux
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -65,9 +68,25 @@ class LoginWidget extends React.Component {
       .then((res) => {
         // Store results if correct response is received by server.
         switch (res.data.code) {
+
           // Store JSON web token in redux state.
           case 'LOGIN_SUCCESS':
-            this.props.storeToken(res.data.payload.token);
+
+            // Update alert message.
+            this.setAlert('SUCCESS', res.data.message);
+
+            // Redirect function.
+            const redirect = () => {
+              // Store token in redux state.
+              this.props.storeToken(res.data.payload.token);
+
+              // Redirect to home page.
+              this.props.router.replace('/');
+            };
+
+            // Redirect to home page.
+            setTimeout(redirect.bind(this), 1500);
+
             break;
 
           // Unexpected response, show error box.
@@ -148,7 +167,7 @@ const mapStateToProps = state => ({ token: state.token });
 const mapDispatchToProps = dispatch => (bindActionCreators({ storeToken }, dispatch));
 
 // Allow component access to Redux store.
-export default connect(mapStateToProps, mapDispatchToProps)(LoginWidget);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(LoginWidget));
 
 // Typecheck this.props.
 LoginWidget.propTypes = {
